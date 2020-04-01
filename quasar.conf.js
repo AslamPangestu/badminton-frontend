@@ -55,6 +55,7 @@ module.exports = function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
+      distDir: ctx.mode.spa ? 'public' : null,
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 
       // rtl: false, // https://quasar.dev/options/rtl-support
@@ -68,7 +69,7 @@ module.exports = function (ctx) {
           API_BASE_URL: JSON.stringify('http://localhost:5000/api')
         }
         : { // and on build (production):
-          API_BASE_URL: JSON.stringify('http://localhost:5000/api')
+          API_BASE_URL: JSON.stringify('https://badminton-backend.herokuapp.com/api')
         },
       // preloadChunks: false,
       // extractCSS: false,
