@@ -7,8 +7,9 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg" />
           </q-avatar>
-          <div class="q-ml-sm">Badminton Tetamba</div>
+          <div class="q-ml-sm">Dashboard</div>
         </q-toolbar-title>
+        <q-btn flat dense label="Go To App" to="/" />
       </q-toolbar>
     </q-header>
 
@@ -21,7 +22,7 @@
       content-class="bg-grey-3"
     >
       <q-list>
-        <DrawerItem v-for="link in essentialLinks" :key="link.title" v-bind="link" />
+        <DrawerItem v-for="link in menu" :key="link.title" v-bind="link" />
       </q-list>
     </q-drawer>
 
@@ -33,34 +34,35 @@
 
 <script>
 import DrawerItem from '../components/Layout/DrawerItem'
+const MENU = [
+  {
+    title: 'Dashboard',
+    icon: 'fas fa-home',
+    link: '/admin'
+  },
+  {
+    title: 'Player',
+    icon: 'fas fa-user',
+    link: '/admin/player'
+  },
+  {
+    title: 'Presence',
+    icon: 'fas fa-book-open',
+    link: '/admin/presence'
+  },
+  {
+    title: 'Match',
+    icon: 'fas fa-calendar-plus',
+    link: '/admin/match'
+  }
+]
 export default {
-  name: 'BaseLayout',
+  name: 'AdminLayout',
   components: { DrawerItem },
   data () {
     return {
       left: false,
-      essentialLinks: [
-        {
-          title: 'Home',
-          icon: 'fas fa-home',
-          link: '/admin'
-        },
-        {
-          title: 'Player',
-          icon: 'fas fa-user',
-          link: '/admin/player'
-        },
-        {
-          title: 'Presence',
-          icon: 'fas fa-book-open',
-          link: '/admin/presence'
-        },
-        {
-          title: 'Match',
-          icon: 'fas fa-calendar-plus',
-          link: '/admin/match'
-        }
-      ]
+      menu: MENU
     }
   }
 }

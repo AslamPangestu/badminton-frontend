@@ -26,7 +26,7 @@
             />
             <q-radio keep-color v-model="is_single" val="1" label="Single" color="red" />
             <q-radio keep-color v-model="is_single" val="0" label="Double" color="pink" />
-            <q-select clearable v-model="refree" :options="options" label="Wasit" />
+            <q-select clearable v-model="referee" :options="options" label="Wasit" />
           </q-card-section>
           <q-separator dark />
           <q-card-actions align="center">
@@ -63,7 +63,7 @@ export default {
     return {
       name: '',
       location: '',
-      refree: '',
+      referee: '',
       is_single: '',
       options: [],
       breadcums: BREADCUMS
@@ -78,7 +78,7 @@ export default {
         await this.$axios.post(`${process.env.API_BASE_URL}/v1/matches`, {
           name: this.name,
           location: this.location,
-          refree: this.refree.value,
+          referee: this.referee.value,
           is_single: this.is_single === '1'
         })
         this.$router.back()
@@ -89,7 +89,7 @@ export default {
     onReset () {
       this.name = ''
       this.location = ''
-      this.refree = ''
+      this.referee = ''
       this.is_single = ''
     },
     async getWasits () {

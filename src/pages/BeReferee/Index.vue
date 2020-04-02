@@ -4,10 +4,17 @@
       <Breadcums :data="breadcums" />
     </div>
     <div class="q-pt-md">
-      <q-btn color="primary" icon="fa fa-plus" label="Create" to="match/create" />
+      <q-btn color="primary" icon="fa fa-plus" label="Create" to="be-referee/create" />
     </div>
     <div class="q-pt-md">
-      <Table1 :columns="columns" model="Match" url="matches" :isViewtable="false" path="match" />
+      <Table1
+        :columns="columns"
+        model="Menjadi Wasit"
+        url="matches"
+        path="be-referee"
+        :isGrid="true"
+        detailLabel="Match"
+      />
     </div>
   </q-page>
 </template>
@@ -18,28 +25,21 @@ import Table1 from 'src/components/Table1'
 
 const BREADCUMS = [
   {
-    title: 'Home',
+    title: 'Dashboard',
     icon: 'fas fa-home',
-    link: '/admin'
+    link: '/'
   },
   {
-    title: 'Match',
-    icon: 'fas fa-calendar-plus'
+    title: 'Menjadi Wasit',
+    icon: 'fas fa-user'
   }
 ]
 const COLUMS = [
   {
-    name: 'name',
-    label: 'Pertandingan',
-    align: 'left',
-    field: row => row.name,
-    sortable: true
-  },
-  {
     name: 'is_single',
     label: 'Tipe',
     align: 'left',
-    field: row => row.is_single ? 'Single' : 'Double',
+    field: row => (row.is_single ? 'Single' : 'Double'),
     sortable: true
   },
   {
@@ -59,7 +59,7 @@ const COLUMS = [
 ]
 
 export default {
-  name: 'PageMatch',
+  name: 'PagePlayer',
   components: { Breadcums, Table1 },
   data () {
     return {

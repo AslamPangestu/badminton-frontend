@@ -2,21 +2,21 @@
   <q-markup-table>
     <thead>
       <tr>
-        <th class="text-left">
-          <b>No.</b>
+        <th class="text-left text-weight-bolder">
+          No.
         </th>
-        <th class="text-left" v-for="item in header" :key="item.key" v-bind="item">
-          <b>{{item.label}}</b>
+        <th class="text-left text-weight-bolder" v-for="item in header" :key="item.key" v-bind="item">
+          {{item.label}}
         </th>
-        <th class="text-right">
-          <b>Actions</b>
+        <th class="text-right text-weight-bolder">
+          Actions
         </th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="item in data" :key="item.id" v-bind="item">
-        <td class="text-left">
-          <b>No.</b>
+        <td class="text-left text-weight-bolder">
+          No.
         </td>
         <td
           class="text-left"
@@ -38,7 +38,7 @@
             flat
             round
             size="xs"
-            v-if="isDeletabel"
+            v-if="isDeletable"
             icon="fas fa-trash"
             @click="showDelete(item._id,item.nickname)"
           />
@@ -79,7 +79,7 @@ export default {
       type: Boolean,
       default: true
     },
-    isDeletabel: {
+    isDeletable: {
       type: Boolean,
       default: true
     },

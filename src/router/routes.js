@@ -4,14 +4,24 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { path: '', component: () => import('pages/Client.vue') },
+      { path: 'login', component: () => import('pages/Login/Client.vue') },
+      // History Route
+      { path: 'history', component: () => import('pages/History/Index.vue') },
+      { path: 'history/:id', component: () => import('pages/History/Detail.vue') },
+      // Be Referee Route
+      { path: 'be-referee', component: () => import('pages/BeReferee/Index.vue') },
+      { path: 'be-referee/create', component: () => import('pages/BeReferee/Create.vue') },
+      { path: 'be-referee/:id', component: () => import('pages/BeReferee/Detail.vue') },
+      { path: 'be-referee/:id/edit', component: () => import('pages/BeReferee/Edit.vue') }
     ]
   },
   {
     path: '/admin',
-    component: () => import('layouts/BaseLayout.vue'),
+    component: () => import('layouts/AdminLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') },
+      { path: '', component: () => import('pages/Admin.vue') },
+      // Player Route
       { path: 'player', component: () => import('pages/Player/Index.vue') },
       { path: 'player/create', component: () => import('pages/Player/Create.vue') },
       { path: 'player/:id', component: () => import('pages/Player/Index.vue') },

@@ -6,27 +6,34 @@
     <div class="q-pt-md">
       <q-card class="my-card">
         <q-card-section>
-          <div class="text-h5">Edit Match</div>
+          <div class="text-h5">Edit Player</div>
         </q-card-section>
         <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
           <q-card-section>
             <q-input
               filled
-              v-model="name"
-              label="Nama Pertandingan"
+              v-model="fullname"
+              label="Nama Lengkap"
               lazy-rules
               :rules="[ val => val && val.length > 0 || 'Please type something']"
             />
             <q-input
               filled
-              v-model="location"
-              label="Lokasi Pertandingan"
+              v-model="nickname"
+              label="Nama Panggilan"
               lazy-rules
               :rules="[ val => val && val.length > 0 || 'Please type something']"
             />
-            <q-radio keep-color v-model="is_single" val="1" label="Single" color="red" />
-            <q-radio keep-color v-model="is_single" val="0" label="Double" color="pink" />
-            <q-select clearable v-model="referee" :options="options" label="Wasit" />
+            <q-input
+              filled
+              v-model="phone"
+              type="number"
+              label="Nomor HP"
+              lazy-rules
+              :rules="[ val => val && val.length > 0 || 'Please type something']"
+            />
+            <q-radio keep-color v-model="gender" val="L" label="Laki-Laki" color="red" />
+            <q-radio keep-color v-model="gender" val="P" label="Perempuan" color="pink" />
           </q-card-section>
           <q-separator dark />
           <q-card-actions align="center">
@@ -41,7 +48,6 @@
 
 <script>
 import Breadcums from 'src/components/Layout/Breadcums'
-
 const BREADCUMS = [
   {
     title: 'Home',
@@ -49,40 +55,38 @@ const BREADCUMS = [
     link: '/admin'
   },
   {
-    title: 'Match',
-    icon: 'fas fa-calendar-plus',
-    link: '/admin/match'
+    title: 'Player',
+    icon: 'fas fa-user',
+    link: '/admin/player'
   },
   {
-    title: 'Create Match'
+    title: 'Edit Player'
   }
 ]
 export default {
-  name: 'PageEditMatch',
+  name: 'PageEditPlayer',
   components: { Breadcums },
   data () {
     return {
       id: '',
-      name: '',
-      location: '',
-      referee: '',
-      is_single: '',
-      options: [],
+      fullname: '',
+      nickname: '',
+      phone: '',
+      gender: '',
       breadcums: BREADCUMS
     }
   },
   created () {
-    this.getWasits()
     this.getData()
   },
   methods: {
     async onSubmit () {
       try {
         await this.$axios.patch(`${process.env.API_BASE_URL}/v1/players/${this.id}`, {
-          name: this.name,
-          location: this.location,
-          referee: this.referee.value,
-          is_single: this.is_single === '1'
+          fullname: this.fullname,
+          nickname: this.nickname,
+          phone: this.phone,
+          gender: this.gender
         })
         this.$router.back()
       } catch (error) {
@@ -90,26 +94,18 @@ export default {
       }
     },
     onReset () {
-      this.name = ''
-      this.location = ''
-      this.referee = ''
-      this.is_single = ''
-    },
-    async getWasits () {
-      const res = await this.$axios.get(`${process.env.API_BASE_URL}/v1/players`)
-      const options = []
-      res.data.data.map(item => {
-        options.push({ value: item._id, label: item.nickname })
-      })
-      this.options = options
+      this.fullname = ''
+      this.nickname = ''
+      this.phone = ''
+      this.gender = ''
     },
     async getData () {
       const { id } = this.$route.params
-      const res = await this.$axios.get(`${process.env.API_BASE_URL}/v1/matches/${id}`)
-      this.name = res.data.data.name
-      this.location = res.data.data.location
-      this.referee = res.data.data.referee
-      this.is_single = res.data.data.is_single
+      const res = await this.$axios.get(`${process.env.API_BASE_URL}/v1/players/${id}`)
+      this.fullname = res.data.data.fullname
+      this.nickname = res.data.data.nickname
+      this.phone = res.data.data.phone
+      this.gender = res.data.data.gender
       this.id = id
     }
   }

@@ -4,10 +4,15 @@
       <Breadcums :data="breadcums" />
     </div>
     <div class="q-pt-md">
-      <q-btn color="primary" icon="fa fa-plus" label="Create" to="match/create" />
-    </div>
-    <div class="q-pt-md">
-      <Table1 :columns="columns" model="Match" url="matches" :isViewtable="false" path="match" />
+      <Table1
+        :columns="columns"
+        model="Riwayat Pertandingan"
+        url="matches"
+        path="history"
+        :isGrid="true"
+        :isDeletable="false"
+        :isEditable="false"
+      />
     </div>
   </q-page>
 </template>
@@ -18,23 +23,16 @@ import Table1 from 'src/components/Table1'
 
 const BREADCUMS = [
   {
-    title: 'Home',
+    title: 'Dashboard',
     icon: 'fas fa-home',
-    link: '/admin'
+    link: '/'
   },
   {
-    title: 'Match',
-    icon: 'fas fa-calendar-plus'
+    title: 'Riwayat',
+    icon: 'fas fa-book-open'
   }
 ]
 const COLUMS = [
-  {
-    name: 'name',
-    label: 'Pertandingan',
-    align: 'left',
-    field: row => row.name,
-    sortable: true
-  },
   {
     name: 'is_single',
     label: 'Tipe',
@@ -59,7 +57,7 @@ const COLUMS = [
 ]
 
 export default {
-  name: 'PageMatch',
+  name: 'PageHistory',
   components: { Breadcums, Table1 },
   data () {
     return {
